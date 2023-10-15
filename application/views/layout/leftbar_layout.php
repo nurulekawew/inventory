@@ -30,7 +30,7 @@
 
       <li><a><i class="fa fa-university"></i> Master Data <span class="fa fa-chevron-down"></span></a>
         <ul class="nav child_menu">
-          <li><a href="#">Data Barang</a></li> 
+          <li><a href="barang">Data Barang</a></li> 
           <li><a href="toko">Data Toko</a></li> 
         </ul>
       </li>
