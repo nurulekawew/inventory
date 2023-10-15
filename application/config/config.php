@@ -23,7 +23,12 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 | a PHP script and you can easily do that on your own.
 |
 */
-$config['base_url'] = '';
+// $config['base_url'] = '';
+
+
+$http = 'http' . ((isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] == 'on') ? 's' : '') . '://';
+$newurl = str_replace("index.php","", $_SERVER['SCRIPT_NAME']);
+$config['base_url']    = "$http" . $_SERVER['SERVER_NAME'] . "" . $newurl;
 
 /*
 |--------------------------------------------------------------------------
@@ -78,7 +83,7 @@ $config['url_suffix'] = '';
 | than english.
 |
 */
-$config['language']	= 'english';
+$config['language']	= 'bahasa_indonesia';
 
 /*
 |--------------------------------------------------------------------------
@@ -326,7 +331,7 @@ $config['cache_query_string'] = FALSE;
 | https://codeigniter.com/userguide3/libraries/encryption.html
 |
 */
-$config['encryption_key'] = '';
+$config['encryption_key'] = 'cimdzrDGTYkdBATTUQ73uJtFFUy6tSrKNWme5xRVA7D1p6Ef2h';
 
 /*
 |--------------------------------------------------------------------------
@@ -530,3 +535,15 @@ $config['rewrite_short_tags'] = FALSE;
 | Array:		array('10.0.1.200', '192.168.5.0/24')
 */
 $config['proxy_ips'] = '';
+
+
+// Autoload extended core class.
+function my_load($class)
+{
+    if (strpos($class, 'CI_') !== 0) {
+        if (is_readable(APPPATH . 'core/' . $class . '.php')) {
+            require_once(APPPATH . 'core/' . $class . '.php');
+        }
+    }
+}
+spl_autoload_register('my_load');

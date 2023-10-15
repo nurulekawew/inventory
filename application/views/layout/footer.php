@@ -1,0 +1,1 @@
+Sekolah Ku - Bootstrap Admin Template by <a href="<?php base_url(); ?>">Colorlib</a>
