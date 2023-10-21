@@ -30,22 +30,22 @@
 
       <li><a><i class="fa fa-university"></i> Master Data <span class="fa fa-chevron-down"></span></a>
         <ul class="nav child_menu">
-          <li><a href="barang">Data Barang</a></li> 
-          <li><a href="toko">Data Toko</a></li> 
+          <li><a href="<?= base_url('barang') ?>">Data Barang</a></li> 
+          <li><a href="<?= base_url('toko') ?>">Data Toko</a></li> 
         </ul>
       </li>
 
       <li><a><i class="fa fa-industry"></i> Inventory <span class="fa fa-chevron-down"></span></a>
-        <ul class="nav child_menu">ba
-          <li><a href="#">Barang Masuk</a></li> 
-          <li><a href="#">Barang Keluar</a></li>
+        <ul class="nav child_menu">
+          <li><a href="<?= base_url('barang_masuk') ?>">Barang Masuk</a></li> 
+          <li><a href="<?= base_url('barang_keluar') ?>">Barang Keluar</a></li>
         </ul>
       </li>
 
       <li><a><i class="fa fa-pie-chart"></i> Dashboard Report <span class="fa fa-chevron-down"></span></a>
         <ul class="nav child_menu">
-          <li><a href="#">Barang Masuk</a></li> 
-          <li><a href="#">Barang Keluar</a></li>
+          <li><a href="<?= base_url('dasboard/masuk') ?>">Barang Masuk</a></li> 
+          <li><a href="<?= base_url('dasboard/keluar') ?>">Barang Keluar</a></li>
         </ul>
       </li>
 

@@ -14,11 +14,11 @@
       <thead>
         <tr>
           	<th>No</th>
+          	<th>Id Inventory</th>
           	<th>Kode Barang</th>
-          	<th>Nama Barang</th>
-          	<th>Unit</th>
-            <th>Stock Barang</th>
-            <th>Foto Barang</th>
+          	<th>Jumlah Unit</th>
+            <th>Id Toko</th>
+            <th>Status Barang</th>
             <th>Action</th>
         </tr>
       </thead>
@@ -28,20 +28,20 @@
       <?php foreach($data as $row): ?>
             <tr>
               <td><?= $i++; ?></td>
+              <td><?= $row->id_inventory ?></td>
               <td><?= $row->kode_barang ?></td>
-              <td><?= $row->nama_barang ?></td>
-              <td><?= $row->unit ?></td>
-              <td><?= $row->stok_barang ?></td>
-              <td><?= $row->foto_barang ?></td>
+              <td><?= $row->jumlah_unit ?></td>
+              <td><?= $row->id_toko ?></td>
+              <td><?= $row->status_barang ?></td>
               <td>
-                <?php echo anchor("barang/edit/$row->kode_barang", '<i class="fa fa-edit"></i>', array('class' => 'btn btn-warning btn-xs')); ?>
-                <?php echo anchor("barang/delete/$row->kode_barang", '<i class="fa fa-remove"></i>', array('class' => 'btn btn-danger btn-xs')); ?>
+                <?php echo anchor("toko/edit/$row->id_inventory", '<i class="fa fa-edit"></i>', array('class' => 'btn btn-warning btn-xs')); ?>
+                <?php echo anchor("toko/delete/$row->id_inventory", '<i class="fa fa-remove"></i>', array('class' => 'btn btn-danger btn-xs')); ?>
               </td>
             </tr>
        <?php endforeach ?>
       </tbody>
     </table>
 <?php else: ?>
-	<p>Data <b>Barang</b> kosong atau tidak ditemukan.</p>
+	<p>Data <b>Inventory</b> kosong atau tidak ditemukan.</p>
 <?php endif ?>
   </div>

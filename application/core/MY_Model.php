@@ -35,7 +35,7 @@ class MY_Model extends CI_Model
     public function getAll()
     {
         return $this->db->get($this->table)->result();
-    }
+    } 
 
     public function paginate($page)
     {
@@ -64,7 +64,7 @@ class MY_Model extends CI_Model
     {
         $this->db->where($column, $condition);
         return $this;
-    }
+    } 
 
     public function orLike($column, $condition)
     {
