@@ -35,6 +35,17 @@ class Toko_Model extends MY_Model {
             'nomer_handphone'      => '',         
         ];
     }
+
+	public function FakeToko()
+	{
+		$data = [
+			'nama_toko' => $this->faker->company,
+			'alamat' => $this->faker->streetAddress,
+			'nomer_handphone' => $this->faker->phoneNumber
+		];
+
+		return (object)$data;
+	}
     
 
 }

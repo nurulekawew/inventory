@@ -68,6 +68,16 @@ class Toko extends MY_Controller {
 		}
 	}
 
+	public function faker($jumlah = 5)
+	{
+		for ($i=0; $i < $jumlah; $i++) {			
+			$data = $this->toko->FakeToko(); 
+			$this->toko->insert($data);
+		}
+		$this->session->set_flashdata('success', '<strong>Success</strong>, Data berhasil digenerate.'); 
+		redirect('toko');
+	}
+
 }
 
 /* End of file Toko.php */

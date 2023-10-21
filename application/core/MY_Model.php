@@ -15,7 +15,7 @@ class MY_Model extends CI_Model
         parent::__construct();
 
 		include APPPATH.'/third_party/Faker/src/autoload.php';
-		$this->faker =  Faker\Factory::create();
+		$this->faker =  Faker\Factory::create('id_ID'); 
 
         if (!$this->table) {
             $this->table = strtolower(str_replace('_Model', '', get_class($this)));
@@ -85,11 +85,10 @@ class MY_Model extends CI_Model
     }
 
     public function insert($data)
-    {
+    { 
         $data->create_by = $this->CurrentUser;
-        $data->create_date = $this->CurrentUser;
-        // $data->is_active = true;
-
+        $data->create_date = $this->CurrentDate;
+        // $data->is_active = true; 
         
         $this->db->insert($this->table, $data);
         return $this->db->insert_id();
@@ -98,7 +97,7 @@ class MY_Model extends CI_Model
     public function update($data)
     {
         $data->modified_by = $this->CurrentUser;
-        $data->modified_date = $this->CurrentUser;
+        $data->modified_date = $this->CurrentDate;
 
         return $this->db->update($this->table, $data);
     }
