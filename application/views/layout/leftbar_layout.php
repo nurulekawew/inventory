@@ -36,7 +36,7 @@
       </li>
 
       <li><a><i class="fa fa-industry"></i> Inventory <span class="fa fa-chevron-down"></span></a>
-        <ul class="nav child_menu">
+        <ul class="nav child_menu">ba
           <li><a href="#">Barang Masuk</a></li> 
           <li><a href="#">Barang Keluar</a></li>
         </ul>
