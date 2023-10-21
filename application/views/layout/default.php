@@ -7,7 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>Sekolah KU - <?php echo $title; ?></title>
+    <title>Inventory - <?php echo $title; ?></title>
 
     <!-- Bootstrap -->
     <link href="<?php echo base_url(); ?>/asset/themes1/vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">

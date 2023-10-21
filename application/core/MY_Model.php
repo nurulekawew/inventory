@@ -14,6 +14,9 @@ class MY_Model extends CI_Model
     {
         parent::__construct();
 
+		include APPPATH.'/third_party/Faker/src/autoload.php';
+		$this->faker =  Faker\Factory::create();
+
         if (!$this->table) {
             $this->table = strtolower(str_replace('_Model', '', get_class($this)));
         }
