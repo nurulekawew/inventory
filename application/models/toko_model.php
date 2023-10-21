@@ -26,6 +26,15 @@ class Toko_Model extends MY_Model {
 
         return $validationRules;
     }
+
+	public function getDefaultValues()
+    {
+        return [
+            'nama_toko'    => '',
+            'alamat'  => '',
+            'nomer_handphone'      => '',         
+        ];
+    }
     
 
 }
