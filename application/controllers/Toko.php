@@ -66,6 +66,11 @@ class Toko extends MY_Controller {
 		}else{
 			$this->create();
 		}
+
+// 		$this->load->library('upload_handler');
+// $file_name = 'nama_file_baru.jpg';
+// $input_name = 'my_file'; // Nama field file input pada formulir HTML Anda
+// $result = $this->upload_handler->do_upload($input_name, $file_name);
 	}
 
 	public function faker($jumlah = 5)
