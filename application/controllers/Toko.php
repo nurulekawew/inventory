@@ -86,8 +86,6 @@ class Toko extends MY_Controller {
 
 	public function pdf()
 	{
-		$data['data'] = $this->toko->getAll();
-		$data['title'] = "Managemen Toko";
 		$data = [
 			'data' =>  $this->toko->getAll(),
 			'title' => 'Managemen Toko',
