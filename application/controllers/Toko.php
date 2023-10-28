@@ -9,13 +9,14 @@ class Toko extends MY_Controller {
 	{
 		parent::__construct();
 		$this->load->library('template');
+		$this->load->library('Pdflib');
 	}
     
     public function index()
     {
-        $data['create_url'] = $this->base . "/create";
-        $data['edit_url'] = $this->base . "/edit";
-        $data['delete_url'] = $this->base . "/delete";
+        $data['create_url'] = $this->base . "-create";
+        $data['edit_url'] = $this->base . "-edit";
+        $data['delete_url'] = $this->base . "-delete";
 		$data['title'] = "Managemen Toko";
 		$data['data'] = $this->toko->getAll();
 		$this->template->admthemes($this->base . '/index',$data);
@@ -81,6 +82,23 @@ class Toko extends MY_Controller {
 		}
 		$this->session->set_flashdata('success', '<strong>Success</strong>, Data berhasil digenerate.'); 
 		redirect('toko');
+	}
+
+	public function pdf()
+	{
+		$data['data'] = $this->toko->getAll();
+		$data['title'] = "Managemen Toko";
+		$data = [
+			'data' =>  $this->toko->getAll(),
+			'title' => 'Managemen Toko',
+			'tanggal_sekarang' => $this->toko->CurrentDate,
+			'by' => $this->toko->CurrentUser
+		];
+		$this->pdflib->setPaper('A4', 'landscape');
+		$this->pdflib->filename = "laporan-" . $this->base . ".pdf";
+		$this->pdflib->load_view($this->base . '/pdf', $data);
+		// $this->load->view($this->base . '/pdf', $data);
+		
 	}
 
 }
