@@ -51,13 +51,14 @@ class Barang_Model extends MY_Model {
 		$data = [
 			'nama_barang' => $this->faker->company,
 			'kode_barang' => $this->faker->streetAddress,
-			'unit' => $this->faker->phoneNumber
+			'unit' => $this->faker->phoneNumber,
             'stock_barang' => $this->faker->phoneNumber
 		];
 
 		return (object)$data;
     
 
+    }
 }
 
 /* End of file ModelName.php */
