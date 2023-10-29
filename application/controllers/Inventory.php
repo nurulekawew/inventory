@@ -12,13 +12,13 @@ class Inventory extends MY_Controller {
 		$this->load->library('template');
 	}
     
-    public function index()
-    {
+    // public function index()
+    // {
         
-		$data['title'] = "Managemen Toko";
-		$data['data'] = $this->inventory->getAll();
-		$this->template->admthemes('inventory/index',$data);
-    } 
+	// 	$data['title'] = "Managemen Toko";
+	// 	$data['data'] = $this->inventory->getAll();
+	// 	$this->template->admthemes('inventory/index',$data);
+    // } 
     
     public function index_masuk()
     {        

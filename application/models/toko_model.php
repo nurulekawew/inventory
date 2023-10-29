@@ -15,7 +15,7 @@ class Toko_Model extends MY_Model {
             [
                 'field' => 'alamat',
                 'label' => 'Alamat',
-                'rules' => 'trim|required|min_length[4]|max_length[100]'
+                'rules' => 'trim|min_length[4]|max_length[100]'
             ],
             [
                 'field' => 'nomer_handphone',

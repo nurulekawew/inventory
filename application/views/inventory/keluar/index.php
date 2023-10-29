@@ -32,7 +32,7 @@
               <td><?= $row->kode_barang ?></td>
               <td><?= $row->jumlah_unit ?></td>
               <td><?= $row->id_toko ?></td>
-              <td><?= $row->status_barang ?></td>
+              <td><?= $row->status_barang == 1 ? "Barang Masuk" : "Barang Keluar" ?></td>
               <td>
                 <?php echo anchor("toko/edit/$row->id_inventory", '<i class="fa fa-edit"></i>', array('class' => 'btn btn-warning btn-xs')); ?>
                 <?php echo anchor("toko/delete/$row->id_inventory", '<i class="fa fa-remove"></i>', array('class' => 'btn btn-danger btn-xs')); ?>

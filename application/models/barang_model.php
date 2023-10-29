@@ -36,8 +36,29 @@ class Barang_Model extends MY_Model {
 
         return $validationRules;
     }
+    public function getDefaultValues()
+    {
+        return [
+            'nama_barang'    => '',
+            'kode_barang'  => '',
+            'unit'      => '', 
+            'stock_barang'      => '',         
+        ];
+    }
+
+	public function FakeToko()
+	{
+		$data = [
+			'nama_barang' => $this->faker->company,
+			'kode_barang' => $this->faker->streetAddress,
+			'unit' => $this->faker->phoneNumber,
+            'stock_barang' => $this->faker->phoneNumber
+		];
+
+		return (object)$data;
     
 
+    }
 }
 
 /* End of file ModelName.php */
