@@ -36,6 +36,7 @@ class Barang extends MY_Controller {
         }
 
 		redirect(base_url($this->$base));
+	}
 
 	public function create()
 	{
@@ -43,24 +44,27 @@ class Barang extends MY_Controller {
 		$data['action'] = $this->base . "/insert";
 
 		$this->template->admthemes($this->base . '/create',$data);
+	}
 
 	public function insert()
 	{
-			if (!$_POST) {
-				$input = (object) $this->barang->getDefaultValues();
-			} else {
-				$input = (object) $this->input->post(null, true);
-			}  
-	
-			if($this->barang->validate()){
-				if ($this->barang->insert($input)) { 
-					$this->session->set_flashdata('success', '<strong>Success</strong>, Data berhasil disimpan.'); 
-					redirect('barang');
-				}else {  
-					$this->session->set_flashdata('success', '<strong>Success</strong>, Data gagal disimpan.');  
-				}
-			}else{
-				$this->create();
+		if (!$_POST) {
+			$input = (object) $this->barang->getDefaultValues();
+		} else {
+			$input = (object) $this->input->post(null, true);
+		}  
+
+		if($this->barang->validate()){
+			if ($this->barang->insert($input)) { 
+				$this->session->set_flashdata('success', '<strong>Success</strong>, Data berhasil disimpan.'); 
+				redirect('barang');
+			}else {  
+				$this->session->set_flashdata('success', '<strong>Success</strong>, Data gagal disimpan.');  
+			}
+		}else{
+			$this->create();
+		}
+	} 
 
 	public function faker($jumlah = 5)
 	{
@@ -71,7 +75,7 @@ class Barang extends MY_Controller {
 		$this->session->set_flashdata('success', '<strong>Success</strong>, Data berhasil digenerate.'); 
 		redirect('barang');
 		
-			}
+	}
 }
 
 /* End of file Barang.php */
