@@ -59,6 +59,7 @@
 	  						'rows' => '3',
 	  						'class'=> 'form-control col-md-10',
 	  						'value'=> set_value('stock_barang')
+						)); ?>
 </div>
 
 <div class="form-group">
