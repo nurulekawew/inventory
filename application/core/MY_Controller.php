@@ -16,4 +16,10 @@ class MY_Controller extends CI_Controller
             $this->load->model($model . '_model', $model, true);
         }
     }
+
+	public function _dumpexit($data = null)
+	{
+		var_dump($data);
+		exit;
+	}
 }

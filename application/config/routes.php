@@ -49,18 +49,22 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 | Examples:	my-controller/index	-> my_controller/index
 |		my-controller/my-method	-> my_controller/my_method
 */
-$route['default_controller'] = 'Toko';
-$route['404_override'] = '';
-$route['translate_uri_dashes'] = FALSE;
+$route = [
+	'translate_uri_dashes' => FALSE,
+    'default_controller' => 'Toko',
+    'barang_masuk' => 'Inventory/index_masuk',
+    'barang_keluar' => 'Inventory/index_keluar',
 
-$route['barang_masuk'] = 'Inventory/index_masuk';
-$route['barang_keluar'] = 'Inventory/index_keluar';
+	//TOKO
+    'toko-pdf' => 'Toko/pdf',
+    'toko-create' => 'Toko/create',
+    'toko-store' => 'Toko/store',
+    'toko-edit/(:any)' => 'Toko/edit/$1',
+    'toko-update' => 'Toko/update',
+    'toko-delete/(:any)' => 'Toko/delete/$1'
+];
 
 
-$route['toko-pdf'] = 'Toko/pdf';
-$route['toko-create'] = 'Toko/create';
-$route['toko-edit'] = 'Toko/edit';
-$route['toko-delete'] = 'Toko/delete';
 // $routes->group('inventori', function ($routes) {
 // 	$routes->add('barang_masuk', 'Inventory\index_masuk');
 // 	$routes->add('barang_masuk', 'Inventory\index_keluar');

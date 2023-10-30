@@ -4,7 +4,7 @@
 <!-- Flash message -->
 <?php $this->load->view('_partial/flash_message') ?>
 <p>
-    <?php echo anchor($create_url, '<i class="glyphicon glyphicon-plus"> <b>Tambah Data</b></i>', array('class' => 'btn btn-primary btn-sm')); ?>
+    <?php echo anchor($urls['create'], '<i class="glyphicon glyphicon-plus"> <b>Tambah Data</b></i>', array('class' => 'btn btn-primary btn-sm')); ?>
 </p>
 
 <div class="x_content">
@@ -31,8 +31,8 @@
               <td><?= $row->nomer_handphone ?></td>
               <td>
 								<?php $id = base64_encode($row->id_toko);?>
-                <?php echo anchor($edit_url . "/" . $id , '<i class="fa fa-edit"></i>', array('class' => 'btn btn-warning btn-xs')); ?>
-                <?php echo anchor($delete_url . "/" . $id, '<i class="fa fa-remove"></i>', array('class' => 'btn btn-danger btn-xs')); ?>
+                <?php echo anchor($urls['edit'] . "/" . $id , '<i class="fa fa-edit"></i>', array('class' => 'btn btn-warning btn-xs')); ?>
+                <?php echo anchor($urls['delete'] . "/" . $id, '<i class="fa fa-remove"></i>', array('class' => 'btn btn-danger btn-xs')); ?>
               </td>
             </tr>
        <?php endforeach ?>

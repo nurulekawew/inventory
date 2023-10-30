@@ -14,17 +14,27 @@ class Toko extends MY_Controller {
     
     public function index()
     {
-        $data['create_url'] = $this->base . "-create";
-        $data['edit_url'] = $this->base . "-edit";
-        $data['delete_url'] = $this->base . "-delete";
-		$data['title'] = "Managemen Toko";
-		$data['data'] = $this->toko->getAll();
+		$data = [
+			'data' => $this->toko->getAll(),
+			'title' => 'Managemen Toko',
+			'tanggal_sekarang' => $this->toko->CurrentDate,
+			'by' => $this->toko->CurrentUser,
+			// 'create_url' => $this->base . "-create",
+			// 'edit_url' => $this->base . "-edit",
+			// 'delete_url' => $this->base . "-delete",
+			'urls' => [
+				'create' => $this->base . '-create',
+				'edit' => $this->base . '-edit',
+				'delete' => $this->base . '-delete',
+			]
+		];
+		// var_dump($data); exit;
 		$this->template->admthemes($this->base . '/index',$data);
     } 
 
 
 	public function delete($id = null)
-	{
+	{ 
 		$id= base64_decode($id);
 
 		$data = $this->toko->where('id_toko', $id)->get();
@@ -42,14 +52,29 @@ class Toko extends MY_Controller {
 	}	
 
 	public function create()
-	{
-		$data['title'] = "Create Toko";		
-		$data['action'] = $this->base . "/insert";
+	{ 
+		$data = [
+			'title' => "Create Toko",
+			'data' => array(),
+			'action' => $this->base . "-store"
+		]; 
 
 		$this->template->admthemes($this->base . '/create',$data);
 	}
 
-	public function insert()
+	public function edit($id = null)
+	{ 
+		$id= base64_decode($id);
+		$data = [
+			'title' => "Edit Toko",
+			'data' => $this->toko->where('id_toko', $id)->get(),
+			'action' => $this->base . "-update"
+		]; 
+		// var_dump($data['data']); exit;
+		$this->template->admthemes($this->base . '/edit',$data);
+	}
+
+	public function store()
 	{
 		if (!$_POST) {
 			$input = (object) $this->toko->getDefaultValues();
@@ -72,6 +97,36 @@ class Toko extends MY_Controller {
 // $file_name = 'nama_file_baru.jpg';
 // $input_name = 'my_file'; // Nama field file input pada formulir HTML Anda
 // $result = $this->upload_handler->do_upload($input_name, $file_name);
+	}
+
+	public function update()
+	{
+		$id = $this->input->post('id_toko');
+
+		if (!$_POST) {
+			$input = (object) $this->toko->getDefaultValues();
+		} else {
+			$input = (object) $this->input->post(null, true);
+			$input->id_toko = base64_decode($id);
+		} 
+
+		if($this->toko->validate()){
+			$cek = $this->toko->where('id_toko', $input->id_toko)->get(); 
+			if($cek == null || $cek->id_toko == "" || $cek->id_toko == null){
+				$this->session->set_flashdata('error', '<strong>Not Found</strong>, Data tidak ditemukan.');
+				$this->edit($id);
+			}else{
+				if ($this->toko->where('id_toko', $input->id_toko)->update($input)) {
+					$this->session->set_flashdata('success', '<strong>Success</strong>, Data berhasil diupdate.');
+				} else {
+					$this->session->set_flashdata('error', '<strong>Failed</strong>, Data gagal diupdate.');
+					$this->edit($id);
+				}
+				redirect('toko');
+			}
+		}else{
+			$this->edit($id);
+		} 
 	}
 
 	public function faker($jumlah = 5)
