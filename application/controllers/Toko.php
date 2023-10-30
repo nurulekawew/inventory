@@ -54,8 +54,7 @@ class Toko extends MY_Controller {
 	public function create()
 	{ 
 		$data = [
-			'title' => "Create Toko",
-			'data' => array(),
+			'title' => "Create Toko", 
 			'action' => $this->base . "-store"
 		]; 
 
@@ -85,9 +84,9 @@ class Toko extends MY_Controller {
 		if($this->toko->validate()){
 			if ($this->toko->insert($input)) { 
 				$this->session->set_flashdata('success', '<strong>Success</strong>, Data berhasil disimpan.'); 
-				redirect('toko');
+				redirect(base_url($this->base));
         	}else {  
-				$this->session->set_flashdata('success', '<strong>Success</strong>, Data gagal disimpan.');  
+				$this->session->set_flashdata('error', '<strong>Error</strong>, Data gagal disimpan.'); 
         	}
 		}else{
 			$this->create();
@@ -118,11 +117,11 @@ class Toko extends MY_Controller {
 			}else{
 				if ($this->toko->where('id_toko', $input->id_toko)->update($input)) {
 					$this->session->set_flashdata('success', '<strong>Success</strong>, Data berhasil diupdate.');
+					redirect(base_url($this->base));
 				} else {
 					$this->session->set_flashdata('error', '<strong>Failed</strong>, Data gagal diupdate.');
 					$this->edit($id);
 				}
-				redirect('toko');
 			}
 		}else{
 			$this->edit($id);
@@ -136,7 +135,7 @@ class Toko extends MY_Controller {
 			$this->toko->insert($data);
 		}
 		$this->session->set_flashdata('success', '<strong>Success</strong>, Data berhasil digenerate.'); 
-		redirect('toko');
+		redirect(base_url($this->base));
 	}
 
 	public function pdf()

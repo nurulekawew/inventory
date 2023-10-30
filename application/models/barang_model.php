@@ -12,26 +12,26 @@ class Barang_Model extends MY_Model {
                 'label' => 'Nama Barang',
                 'rules' => 'trim|required|min_length[3]|max_length[100]'
             ],
-            [
-                'field' => 'kode_barang',
-                'label' => 'Kode Barang',
-                'rules' => 'trim|required|min_length[4]|max_length[100]'
-            ],
+            // [
+            //     'field' => 'kode_barang',
+            //     'label' => 'Kode Barang',
+            //     'rules' => 'trim|required|min_length[4]|max_length[100]'
+            // ],
             [
                 'field' => 'unit',
                 'label' => 'Unit',
-                'rules' => 'trim|required|min_length[11]|max_length[10]'
+                'rules' => 'trim|required|min_length[1]|max_length[10]'
             ],
-            [
-                'field' => 'stock_barang',
-                'label' => 'Stock Barang',
-                'rules' => 'trim|required|min_length[11]|max_length[12]'
-            ],
-            [
-                'field' => 'foto_barang',
-                'label' => 'Foto Barang',
-                'rules' => 'trim|required|min_length[11]|max_length[12]'
-            ],
+            // [
+            //     'field' => 'stock_barang',
+            //     'label' => 'Stock Barang',
+            //     'rules' => 'trim|required|min_length[11]|max_length[12]'
+            // ],
+            // [
+            //     'field' => 'foto_barang',
+            //     'label' => 'Foto Barang',
+            //     'rules' => 'trim|required|min_length[11]|max_length[12]'
+            // ],
         ];
 
         return $validationRules;
@@ -42,21 +42,20 @@ class Barang_Model extends MY_Model {
             'nama_barang'    => '',
             'kode_barang'  => '',
             'unit'      => '', 
-            'stock_barang'      => '',         
+            'stock_barang'      => 0,         
         ];
     }
 
-	public function FakeToko()
+	public function Fake()
 	{
 		$data = [
-			'nama_barang' => $this->faker->company,
-			'kode_barang' => $this->faker->streetAddress,
-			'unit' => $this->faker->phoneNumber,
-            'stock_barang' => $this->faker->phoneNumber
+			'nama_barang' => $this->faker->realText(rand(10,20)),
+			'kode_barang' => $this->faker->realText(rand(10,20)),
+			'unit' => "lusin",
+            'foto_barang' => image(FCPATH . "upload/barang", 500, 500, 'cats', true, true, 'Faker')
 		];
 
-		return (object)$data;
-    
+		return (object)$data; 
 
     }
 }

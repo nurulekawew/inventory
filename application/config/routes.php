@@ -56,12 +56,23 @@ $route = [
     'barang_keluar' => 'Inventory/index_keluar',
 
 	//TOKO
+    'toko' => 'Toko',
     'toko-pdf' => 'Toko/pdf',
     'toko-create' => 'Toko/create',
     'toko-store' => 'Toko/store',
     'toko-edit/(:any)' => 'Toko/edit/$1',
     'toko-update' => 'Toko/update',
-    'toko-delete/(:any)' => 'Toko/delete/$1'
+    'toko-delete/(:any)' => 'Toko/delete/$1',
+
+	//BARANG
+	'barang' => 'Barang',
+	'barang-pdf' => 'Barang/pdf',
+	'barang-create' => 'Barang/create',
+	'barang-store' => 'Barang/store',
+	'barang-edit/(:any)' => 'Barang/edit/$1',
+	'barang-update' => 'Barang/update',
+	'barang-delete/(:any)' => 'Barang/delete/$1',
+
 ];
 
 

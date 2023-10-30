@@ -4,7 +4,7 @@
 <!-- Flash message -->
 <?php $this->load->view('_partial/flash_message') ?>
 <p>
-    <?php echo anchor('toko/create', '<i class="glyphicon glyphicon-plus"> <b>Tambah Data</b></i>', array('class' => 'btn btn-primary btn-sm')); ?>
+    <?php echo anchor($urls['create'], '<i class="glyphicon glyphicon-plus"> <b>Tambah Data</b></i>', array('class' => 'btn btn-primary btn-sm')); ?>
 </p>
 
 <div class="x_content">
@@ -32,10 +32,12 @@
               <td><?= $row->nama_barang ?></td>
               <td><?= $row->unit ?></td>
               <td><?= $row->stok_barang ?></td>
-              <td><?= $row->foto_barang ?></td>
+              <td><?= $row->foto_barang ?></td> 
+							
               <td>
-                <?php echo anchor("barang/edit/$row->kode_barang", '<i class="fa fa-edit"></i>', array('class' => 'btn btn-warning btn-xs')); ?>
-                <?php echo anchor("barang/delete/$row->kode_barang", '<i class="fa fa-remove"></i>', array('class' => 'btn btn-danger btn-xs')); ?>
+								<?php $id = base64_encode($row->kode_barang);?>
+                <?php echo anchor($urls['edit'] . "/" . $id , '<i class="fa fa-edit"></i>', array('class' => 'btn btn-warning btn-xs')); ?>
+                <?php echo anchor($urls['delete'] . "/" . $id, '<i class="fa fa-remove"></i>', array('class' => 'btn btn-danger btn-xs')); ?>
               </td>
             </tr>
        <?php endforeach ?>

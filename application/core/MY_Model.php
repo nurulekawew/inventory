@@ -8,6 +8,7 @@ class MY_Model extends CI_Model
 
     public $CurrentUser = '';
     public $CurrentDate = '';
+	public $nomorRdm = '';
 
 
     public function __construct()
@@ -20,7 +21,7 @@ class MY_Model extends CI_Model
         if (!$this->table) {
             $this->table = strtolower(str_replace('_Model', '', get_class($this)));
         }
-
+		$this->nomorRdm = date('YmdHis') . mt_rand(1, 99);
         $this->CurrentDate = date('Y-m-d H:i:s');
         $this->CurrentUser = ($this->session->userdata('username') == '' || $this->session->userdata('username') == null) ? "SYSTEM" : $this->session->userdata('username');
     }
@@ -82,6 +83,21 @@ class MY_Model extends CI_Model
         $validationRules = $this->getValidationRules();
         $this->form_validation->set_rules($validationRules);
         return $this->form_validation->run();
+    }
+
+	public function insertNotReturnID($data)
+    { 
+        $data->create_by = $this->CurrentUser;
+        $data->create_date = $this->CurrentDate;
+        // $data->is_active = true; 
+        
+        try {
+			$this->db->insert($this->table, $data);
+			return true;
+		} catch (\Throwable $e) {
+			echo 'Message: ' .$e->getMessage();
+			return false;
+		} 
     }
 
     public function insert($data)
