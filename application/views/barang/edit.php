@@ -52,6 +52,9 @@
 	  						'class'=> 'form-control col-md-10',
 	  						'value'=> $data->unit
 	  )); ?>
+      <span class="fa fa-phone form-control-feedback left" aria-hidden="true"></span>
+	</div>
+	<?= form_error('unit', '<span id="helpBlock2" class="help-block label label-danger">', '</span>'); ?>
       <div class="form-group">
 	<label class="control-label col-md-3 col-sm-3 col-xs-12">Stock Barang</label>
 	<div class="col-md-3 col-sm-3 col-xs-12">
