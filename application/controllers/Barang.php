@@ -107,10 +107,24 @@ class Barang extends MY_Controller {
 			}else{
 				$this->create();
 			}
-		}
-
-		
+		}		
 	}  
+
+
+	public function edit($id = null)
+	{ 
+		$id = base64_decode($id); 
+		$data = (object) $this->barang->where('kode_barang', $id)->get();
+		$file_path = base_url("upload/" . $this->barang->_filePath . "/" . $data->foto_barang); 
+		$data->location = $file_path; 
+		$show = [
+			'title' => "Edit " . $this->base,
+			'data' => $data,
+			'action' => $this->base . "-update"
+		];  
+		$this->template->admthemes($this->base . '/edit',$show);
+	}
+
 
 	public function faker($jumlah = 5)
 	{
