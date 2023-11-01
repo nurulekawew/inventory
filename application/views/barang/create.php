@@ -1,7 +1,8 @@
 <?php $this->load->view('_partial/flash_message') ?>
 
 <?= form_open($action, array(
-								'class' => 'form-horizontal form-label-left'
+								'class' => 'form-horizontal form-label-left',
+								'enctype' => 'multipart/form-data'
 							)) 
 ?>
 
@@ -34,6 +35,19 @@
 	</div>
 	<?= form_error('unit', '<span id="helpBlock2" class="help-block label label-danger">', '</span>'); ?>
 </div>
+
+<div class="form-group">
+    <label class="control-label col-md-3 col-sm-3 col-xs-12">Image</label>
+    <div class="col-md-3 col-sm-3 col-xs-12">
+        <?= form_input(array(
+            'type' => 'file', // Menggunakan input file
+            'name' => 'foto_barang', // Ganti nama field sesuai kebutuhan
+            'class' => 'form-control', // Menambahkan class Bootstrap form-control
+        )); ?>
+    </div>
+    <?= form_error('foto_barang', '<span id="helpBlock2" class="help-block label label-danger">', '</span>'); ?>
+</div>
+
 
 <div class="form-group">
 <div class="col-md-6 col-md-offset-3">

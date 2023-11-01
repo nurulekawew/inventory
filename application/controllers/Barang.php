@@ -8,7 +8,8 @@ class Barang extends MY_Controller {
     public function __construct()
 	{
 		parent::__construct();
-		$this->load->library('template');
+		$this->load->library('template'); 
+		$this->load->library('upload_handler'); 
 	}
     
     public function index()
@@ -33,7 +34,12 @@ class Barang extends MY_Controller {
 		$data = $this->barang->where('kode_barang', $id)->get();
         if (!$data) {
             $this->session->set_flashdata('warning', 'Data tidak ada.');
-        }
+        }		
+		
+		$file_path = FCPATH . "upload/" . $this->barang->_filePath . "/" . $data->foto_barang; 
+		if (file_exists($file_path)) {
+			unlink($file_path);
+		}
 
         if ($this->barang->where('kode_barang', $id)->delete()) {
 			$this->session->set_flashdata('success', '<strong>Success</strong>, Data berhasil dihapus.');
@@ -62,20 +68,49 @@ class Barang extends MY_Controller {
 			$input = (object) $this->input->post(null, true);
 			$input->kode_barang = "B-" . $this->barang->nomorRdm;
 			$input->stok_barang = 0;
-		}  
+		}   
 
-		if($this->barang->validate()){
-			if ($this->barang->insertNotReturnID($input)) { 
-				$this->session->set_flashdata('success', '<strong>Success</strong>, Data berhasil disimpan.'); 
-				redirect(base_url($this->base));
-			}else {  
-				$this->session->set_flashdata('error', '<strong>Error</strong>, Data gagal disimpan.'); 
+		if (!empty($_FILES["foto_barang"]["name"])) {
+			$file_name = $_FILES["foto_barang"]["name"];
+			$ext = pathinfo($file_name, PATHINFO_EXTENSION);
+
+			$input->foto_barang = $input->kode_barang . "." . $ext;
+			// $this->_dumpexit($input->foto_barang . " ===  $file_name");
+
+			if($this->barang->validate()){
+				$folder = $this->barang->_filePath;
+				$isUpload = $this->upload_handler->do_upload($input->foto_barang, $folder); 
+				if($isUpload->status)
+				{
+					if ($this->barang->insertNotReturnID($input)) { 
+						$this->session->set_flashdata('success', '<strong>Success</strong>, Data berhasil disimpan.'); 
+						redirect(base_url($this->base));
+					}else {  
+						$this->session->set_flashdata('error', '<strong>Failed</strong>, ' . $isUpload); 
+						$this->create(); 
+					}
+				}else{
+					$this->create(); 
+				}
+			}else{
 				$this->create(); 
 			}
 		}else{
-			$this->create();
+			if($this->barang->validate()){
+				if ($this->barang->insertNotReturnID($input)) { 
+					$this->session->set_flashdata('success', '<strong>Success</strong>, Data berhasil disimpan.'); 
+					redirect(base_url($this->base));
+				}else {  
+					$this->session->set_flashdata('error', '<strong>Error</strong>, Data gagal disimpan.'); 
+					$this->create(); 
+				}
+			}else{
+				$this->create();
+			}
 		}
-	} 
+
+		
+	}  
 
 	public function faker($jumlah = 5)
 	{

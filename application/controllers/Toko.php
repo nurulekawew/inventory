@@ -90,12 +90,7 @@ class Toko extends MY_Controller {
         	}
 		}else{
 			$this->create();
-		}
-
-// 		$this->load->library('upload_handler');
-// $file_name = 'nama_file_baru.jpg';
-// $input_name = 'my_file'; // Nama field file input pada formulir HTML Anda
-// $result = $this->upload_handler->do_upload($input_name, $file_name);
+		} 
 	}
 
 	public function update()
@@ -110,8 +105,8 @@ class Toko extends MY_Controller {
 		} 
 
 		if($this->toko->validate()){
-			$cek = $this->toko->where('id_toko', $input->id_toko)->get(); 
-			if($cek == null || $cek->id_toko == "" || $cek->id_toko == null){
+			$existing = $this->toko->where('id_toko', $input->id_toko)->get(); 
+			if($existing == null || $existing->id_toko == "" || $existing->id_toko == null){
 				$this->session->set_flashdata('error', '<strong>Not Found</strong>, Data tidak ditemukan.');
 				$this->edit($id);
 			}else{
