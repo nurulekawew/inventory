@@ -86,10 +86,11 @@ class Barang extends MY_Controller {
 						$this->session->set_flashdata('success', '<strong>Success</strong>, Data berhasil disimpan.'); 
 						redirect(base_url($this->base));
 					}else {  
-						$this->session->set_flashdata('error', '<strong>Failed</strong>, ' . $isUpload); 
+						$this->session->set_flashdata('error', '<strong>Failed</strong>, ' . $isUpload->message); 
 						$this->create(); 
 					}
-				}else{
+				}else{ 
+					$this->session->set_flashdata('error', '<strong>Failed</strong>, ' . $isUpload->message); 
 					$this->create(); 
 				}
 			}else{
@@ -123,6 +124,67 @@ class Barang extends MY_Controller {
 			'action' => $this->base . "-update"
 		];  
 		$this->template->admthemes($this->base . '/edit',$show);
+	}
+
+	public function update()
+	{
+		$_id = $this->input->post('id_barang');
+		$id = base64_decode($this->input->post('id_barang'));
+
+		if (!$_POST) {
+			$input = (object) $this->barang->getDefaultValues();
+		} else {
+			$input = (object) $this->input->post(null, true);
+			$input->id_barang = $id;
+		}   
+
+		
+		$existing = $this->barang->where('id_barang', $input->id_barang)->get(); 
+		if($existing == null || $existing->id_barang == "" || $existing->id_barang == null){
+			$this->session->set_flashdata('error', '<strong>Not Found</strong>, Data tidak ditemukan.');
+			redirect(base_url($this->base));
+		}
+
+		if (!empty($_FILES["foto_barang"]["name"])) {
+			$file_name = $_FILES["foto_barang"]["name"];
+			$ext = pathinfo($file_name, PATHINFO_EXTENSION);
+
+			$input->foto_barang = $existing->kode_barang . "." . $ext;
+
+			if($this->barang->validate()){
+				$folder = $this->barang->_filePath;				
+
+				$file_path = FCPATH . "upload/" . $this->barang->_filePath . "/" . $data->foto_barang; 
+				if (file_exists($file_path)) {
+					unlink($file_path);
+				}
+
+				$isUpload = $this->upload_handler->do_upload($input->foto_barang, $folder); 
+				if($isUpload->status)
+				{
+					if ($this->barang->where('id_barang', $input->id_barang)->update($input)) { 
+						$this->session->set_flashdata('success', '<strong>Success</strong>, Data berhasil disimpan.'); 
+						redirect(base_url($this->base));
+					}
+				}				
+					
+				$this->session->set_flashdata('error', '<strong>Failed</strong>, ' . $isUpload->message); 
+				$this->edit($_id);
+			}else{
+				$this->edit($_id);
+			}
+		}else{
+			if($this->barang->validate()){
+				if ($this->barang->where('id_barang', $input->id_barang)->update($input)) { 
+					$this->session->set_flashdata('success', '<strong>Success</strong>, Data berhasil disimpan.'); 
+					redirect(base_url($this->base));
+				}
+			}
+			$this->session->set_flashdata('error', '<strong>Error</strong>, Data gagal disimpan.'); 
+			$this->edit($_id);
+		}
+		
+
 	}
 
 
