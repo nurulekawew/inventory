@@ -1,4 +1,4 @@
-name: Sync with Friend's Repo
+name: Pull and Push
 
 on:
   push:
@@ -6,26 +6,21 @@ on:
       - main  # Ubah ini sesuai dengan nama cabang Anda
 
 jobs:
-  sync:
+  pull_and_push:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout Repository
-        uses: actions/checkout@v3
+    - name: Checkout repositori sumber
+      uses: actions/checkout@v2
+      with:
+        repository: nurulekawew/inventory
+        ref: main # Gunakan cabang yang ingin Anda tarik
 
-      - name: Init User
-        run: |
-          git config --global user.email "mylapengo@gmail.com"
-          git config --global user.name "lapengo" 
-
-      - name: Add Remote for Friend's Repo
-        run: git remote add friend-repo https://github.com/lapengo/inventory.git
-
-      - name: Fetch Updates from Friend's Repo
-        run: git fetch friend-repo
-
-      - name: Merge Updates
-        run: git merge --allow-unrelated-histories friend-repo/main  # Ganti sesuai dengan cabang teman Anda
-
-      - name: Push Changes to Your Repo
-        run: git push origin main  # Ganti sesuai dengan nama cabang Anda
+    - name: Dorong ke repositori tujuan
+      run: |
+        git config --global user.email "you@example.com"
+        git config --global user.name "Nama Anda"
+        git remote add destination https://github.com/lapengo/inventory.git
+        git fetch destination
+        git rebase destination/main
+        git push destination main
