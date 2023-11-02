@@ -22,5 +22,5 @@ jobs:
         git config --global user.name "Arif Lapengo"
         git remote add destination https://github.com/lapengo/inventory.git
         git fetch destination
-        git rebase destination/action
-        git push destination action
+        git rebase destination/baction
+        git push destination baction
