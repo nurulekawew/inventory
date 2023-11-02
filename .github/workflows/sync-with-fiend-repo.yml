@@ -11,7 +11,7 @@ jobs:
 
     steps:
     - name: Checkout repositori sumber
-      uses: actions/checkout@v2
+      uses: actions/checkout@v3
       with:
         repository: nurulekawew/inventory
         ref: main # Gunakan cabang yang ingin Anda tarik
@@ -20,7 +20,6 @@ jobs:
       run: |
         git config --global user.email "mylapengo@gmail.com"
         git config --global user.name "Arif Lapengo"
-        git remote add destination https://github.com/lapengo/inventory.git
-        git fetch destination
-        git rebase destination/baction
-        git push destination baction
+        git add .
+        git commit -m "Auto commit"
+        git push git@github.com:lapengo/inventory.git main 
