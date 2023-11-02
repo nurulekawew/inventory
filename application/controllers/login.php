@@ -9,7 +9,7 @@ class Login extends CI_Controller{
 	}
  
 	function index(){
-		$this->load->view('login');
+		$this->load->view('login/login');
 	}
  
 	function aksi_login(){
