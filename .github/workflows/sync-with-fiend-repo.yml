@@ -18,8 +18,8 @@ jobs:
 
     - name: Dorong ke repositori tujuan
       run: |
-        git config --global user.email "you@example.com"
-        git config --global user.name "Nama Anda"
+        git config --global user.email "mylapengo@gmail.com"
+        git config --global user.name "Arif Lapengo"
         git remote add destination https://github.com/lapengo/inventory.git
         git fetch destination
         git rebase destination/main
