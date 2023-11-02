@@ -19,7 +19,7 @@ jobs:
           git config --global user.name "lapengo" 
 
       - name: Add Remote for Friend's Repo
-        run: git remote add friend-repo https://github.com/nurulekawew/inventory.git
+        run: git remote add friend-repo https://github.com/lapengo/inventory.git
 
       - name: Fetch Updates from Friend's Repo
         run: git fetch friend-repo
