@@ -1,0 +1,31 @@
+name: Sync with Friend's Repo
+
+on:
+  push:
+    branches:
+      - main  # Ubah ini sesuai dengan nama cabang Anda
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+
+      - name: Init User
+        run: |
+          git config --global user.email "mylapengo@gmail.com"
+          git config --global user.name "lapengo" 
+
+      - name: Add Remote for Friend's Repo
+        run: git remote add friend-repo https://github.com/nurulekawew/inventory.git
+
+      - name: Fetch Updates from Friend's Repo
+        run: git fetch friend-repo
+
+      - name: Merge Updates
+        run: git merge --allow-unrelated-histories friend-repo/main  # Ganti sesuai dengan cabang teman Anda
+
+      - name: Push Changes to Your Repo
+        run: git push origin main  # Ganti sesuai dengan nama cabang Anda
